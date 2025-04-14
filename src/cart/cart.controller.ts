@@ -17,6 +17,7 @@ import { calculateCartTotal } from './models-rules';
 import { CartService } from './services';
 import { CartItem } from './models';
 import { CreateOrderDto, PutCartPayload } from 'src/order/type';
+import { cart, order } from 'src/shared/mock';
 
 @Controller('api/profile/cart')
 export class CartController {
@@ -29,11 +30,11 @@ export class CartController {
   @UseGuards(BasicAuthGuard)
   @Get()
   findUserCart(@Req() req: AppRequest): CartItem[] {
-    const cart = this.cartService.findOrCreateByUserId(
-      getUserIdFromRequest(req),
-    );
+    // const cart = this.cartService.findOrCreateByUserId(
+    //   getUserIdFromRequest(req),
+    // );
 
-    return cart.items;
+    return cart;
   }
 
   // @UseGuards(JwtAuthGuard)
@@ -90,9 +91,9 @@ export class CartController {
     };
   }
 
-  @UseGuards(BasicAuthGuard)
+  //@UseGuards(BasicAuthGuard)
   @Get('order')
   getOrder(): Order[] {
-    return this.orderService.getAll();
+    return order;
   }
 }
